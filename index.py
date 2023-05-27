@@ -6,19 +6,22 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
+from pages import equipos, analisis, home
 
 from app import server
 from app import app
 
 dropdown = dbc.DropdownMenu(
     children=[
-        dbc.DropdownMenuItem("Home", href="/haha"),
-        dbc.DropdownMenuItem("Global", href="/global_situation"),
-        dbc.DropdownMenuItem("Singapore", href="/singapore"),
+        dbc.DropdownMenuItem("Home", href="/home"),
+        dbc.DropdownMenuItem("Equipos", href="/equipos"),
+        dbc.DropdownMenuItem("Analisis", href="/analisis"),
     ],
     nav = True,
     in_navbar = True,
-    label = "Explore",
+    label = "Secciones",
+    style={'fontSize':'20px'}
+
 )
 
 navbar = dbc.Navbar(
@@ -28,7 +31,7 @@ navbar = dbc.Navbar(
                 # Use row and col to control vertical alignment of logo / brand
                 dbc.Row(
                     [
-                        dbc.Col(html.Img(src="assets/nba.png", height="80px")),
+                        dbc.Col(html.Img(src="assets/nba.png", height="100px")),
                     ],
                     align="center",
                     justify='center',
@@ -43,10 +46,11 @@ navbar = dbc.Navbar(
                 ),
                 id="navbar-collapse2",
                 navbar=True,
+                style={'justifyContent':'flex-end'}
             ),
         ]
     ),
-    color="dark",
+    color="#1d418b",
     dark=True,
     className="mb-3",
 )
@@ -71,15 +75,15 @@ app.layout = html.Div([
 ])
 
 
-# @app.callback(Output('page-content', 'children'),
-#               [Input('url', 'pathname')])
-# def display_page(pathname):
-#     if pathname == '/global_situation':
-#         return global_situation.layout
-#     elif pathname == '/singapore':
-#         return singapore.layout
-#     else:
-#         return home.layout
+@app.callback(Output('page-content', 'children'),
+               [Input('url', 'pathname')])
+def display_page(pathname):
+      if pathname == '/equipos':
+          return equipos.layout
+      elif pathname == '/analisis':
+          return analisis.layout
+      else:
+          return home.layout
 
 
 if __name__ == '__main__':
