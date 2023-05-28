@@ -6,7 +6,7 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
-from pages import equipos, analisis, home
+from pages import equipos, analisis, home, jose, miguel, darwin
 
 from app import server
 from app import app
@@ -16,6 +16,9 @@ dropdown = dbc.DropdownMenu(
         dbc.DropdownMenuItem("Home", href="/home"),
         dbc.DropdownMenuItem("Equipos", href="/equipos"),
         dbc.DropdownMenuItem("Analisis", href="/analisis"),
+        dbc.DropdownMenuItem("Darwin", href='/darwin'),
+        dbc.DropdownMenuItem("Miguel", href='/miguel')
+
     ],
     nav = True,
     in_navbar = True,
@@ -82,6 +85,12 @@ def display_page(pathname):
           return equipos.layout
       elif pathname == '/analisis':
           return analisis.layout
+      elif pathname == '/darwin':
+          return darwin.layout
+      elif pathname == '/miguel':
+          return miguel.layout
+      elif pathname == '/jose':
+          return jose.layout
       else:
           return home.layout
 
