@@ -20,17 +20,18 @@ nombres = ['Hawks','Celtics','Nets','Hornets','Bulls','Cavaliers','Mavericks',
            'Magic','76ers','Suns','TrailBlazers','Kings','Spurs','Raptors','Jazz','Wizards']
 l = []
 for team,nombre in zip(teams,nombres):
-    l.append(dbc.Card(
+    l.append(html.A(dbc.Card(
         [
         dbc.CardImg(src=f'../assets/equipos/{team}.png'),
-        dbc.CardBody(f'{team} {nombre}' if nombre not in ['Clippers','Lakers'] else f'L.A {nombre}'),
+        dbc.CardBody(f'{team} {nombre}' if nombre not in ['Clippers','Lakers'] else f'L.A {nombre}', style={'fontSize':'1.1vw','textAlign':'center','fontWeight':'550'}),
         ],
-        style={'height':'100%','padding':'20px'}
-    ))
+        color='dark',
+        style={'height':'100%','padding':'20px'},
+        outline=True,
+    ),href='/home',style={'color':'black'}))
 
-cards = dbc.Row([dbc.Col(i, width=3) for i in l],style={'margin':'20px'})
+cards = dbc.Row([dbc.Col(i, width=3, style={'marginBottom':'20px'}) for i in l])
 
 layout = dbc.Container([html.Div(
-    [cards],
-    style={'marg':'40px'}
+    [cards]
     )])
