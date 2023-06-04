@@ -19,7 +19,7 @@ nombres = ['Hawks','Celtics','Nets','Hornets','Bulls','Cavaliers','Mavericks',
            'Magic','76ers','Suns','TrailBlazers','Kings','Spurs','Raptors','Jazz','Wizards']
 
 for team,nombre in zip(teams,nombres):
-    f = open(f'{team}.py','w')
+    f = open(f'pages/{team}.py','w')
     f.write(f'''\
 import plotly.express as px
 import pandas as pd
