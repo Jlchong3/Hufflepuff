@@ -9,66 +9,42 @@ from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from dash import dash_table
 
-df_1 = pd.read_csv(r'pages/NBA-P.csv')
-
-teams = np.sort(df_1.Tm.unique())
-
-nombres = ['Hawks','Celtics','Nets','Hornets','Bulls','Cavaliers','Mavericks',
-           'Nuggets','Pistons','Warriors','Rockets','Pacers','Clippers','Lakers',
-           'Grizzlies','Heat','Bucks','Timberwolfs','Pelicans','Knicks','Thunder',
-           'Magic','76ers','Suns','TrailBlazers','Kings','Spurs','Raptors','Jazz','Wizards']
-
-for team,nombre in zip(teams,nombres):
-    f = open(f'{team}.py','w')
-    f.write(f'''\
-import plotly.express as px
-import pandas as pd
-import numpy as np
-
-import dash
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
-from dash.exceptions import PreventUpdate
-import dash_bootstrap_components as dbc
-from dash import dash_table
-
 from app import app        
     
 df_1 = pd.read_csv(r'pages/NBA-P.csv')
 
 df_1.drop(columns=['Unnamed: 0.1','Unnamed: 0'], inplace=True)       
             
-df = df_1[df_1['Tm'] == '{team}']
-df.drop(columns=['Tm'], inplace = True)
+df = df_1[df_1['Tm'] == 'Denver']
+df.drop(columns=['Tm'])
 dropdown = dcc.Dropdown(['2021-22','2020-21','2019-20','2018-19','2017-18',
                          '2016-17','2015-16','2014-15','2013-14','2012-13',
                          '2011-12','2010-11','2009-10','2008-09','2007-08',
                          '2006-07','2005-06','2004-05','2003-04','2002-03',
                          '2001-02', '2000-01','1999-00','1998-99','1997-98'],
-                         value = '2021-2022' , id = '{team}-players')
+                         value = '2021-2022' , id = 'Denver-players')
 
 layout = dbc.Container([
     html.Div([
-        html.H1('{team} {nombre}')
+        html.H1('Denver Nuggets')
     ]),
     html.Div([dropdown]),
     html.Div(
-        dbc.Table(id = "{nombre}-table"),
+        dbc.Table(id = "Nuggets-table"),
 )])
 
 @app.callback(
-    Output('{nombre}-table', 'children'),
-    Input('{team}-players','value'))
+    Output('Nuggets-table', 'children'),
+    Input('Denver-players','value'))
 def filter_year(value):
     df_year = df[value == df['Season']]
     if 'Season' in df_year.columns:
         df_year.drop(columns=['Season'], inplace=True)
-    header = [html.Thead(html.Tr([html.Td(i,style:('Fontweight':'Bold')) for i in df_year.columns]))]
+    header = [html.Thead(html.Tr([html.Td(i) for i in df_year.columns]))]
     rows = []
     for i in range(df_year.shape[0]):
         player = []
         for data in df_year.iloc[i]:
             player.append(html.Td(data))
         rows.append(html.Tr(player))
-    return header + [html.Tbody(rows)]''')
-    f.close()
+    return header + [html.Tbody(rows)]

@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from pages import equipos, analisis, home, jose, miguel, darwin
-from pages.teams import Atlanta, Boston, Brooklyn, Charlotte, Chicago, Cleveland, Dallas, Denver, Detroit, Golden_State, Houston, Indiana, LAClippers, LALakers, Memphis,Miami, Milwaukee, Minnesota, New_Orleans, New_York,Oklahoma_City, Orlando, Philadelphia, Phoenix, Portland, Sacramento, San_Antonio, Toronto, Utah, Washington
+from pages import Atlanta, Boston, Brooklyn, Charlotte, Chicago, Cleveland, Dallas, Denver, Detroit, Golden_State, Houston, Indiana, LAClippers, LALakers, Memphis,Miami, Milwaukee, Minnesota, New_Orleans, New_York,Oklahoma_City, Orlando, Philadelphia, Phoenix, Portland, Sacramento, San_Antonio, Toronto, Utah, Washington
 
 from app import server
 from app import app
@@ -97,94 +97,94 @@ def display_page(pathname):
           return miguel.layout, False, False, False, True, False
       elif pathname == '/jose':
           return jose.layout, False, False, False, False, False
-      elif pathname[8:] == '/Atlanta':
+      elif pathname == '/Atlanta':
         return Atlanta.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Boston':
+      elif pathname == '/Boston':
         return Boston.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Brooklyn':
+      elif pathname == '/Brooklyn':
         return Brooklyn.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Charlotte':
+      elif pathname == '/Charlotte':
         return Charlotte.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Chicago':
+      elif pathname == '/Chicago':
         return Chicago.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Cleveland':
+      elif pathname == '/Cleveland':
         return Cleveland.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Dallas':
+      elif pathname == '/Dallas':
         return Dallas.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Denver':
+      elif pathname == '/Denver':
         return Denver.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Detroit':
+      elif pathname == '/Detroit':
         return Detroit.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Golden State':
+      elif pathname == '/Golden%20State':
         return Golden_State.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Houston':
+      elif pathname == '/Houston':
         return Houston.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Indiana':
+      elif pathname == '/Indiana':
         return Indiana.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/L.A.Clippers':
+      elif pathname == '/L.A.Clippers':
         return LAClippers.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/L.A.Lakers':
+      elif pathname == '/L.A.Lakers':
         return LALakers.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Memphis':
+      elif pathname == '/Memphis':
         return Memphis.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Miami':
+      elif pathname == '/Miami':
         return Miami.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Milwaukee':
+      elif pathname == '/Milwaukee':
         return Milwaukee.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Minnesota':
+      elif pathname == '/Minnesota':
         return Minnesota.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/New Orleans':
+      elif pathname == '/New%20Orleans':
         return New_Orleans.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/New York':
+      elif pathname == '/New%20York':
         return New_York.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Oklahoma City':
+      elif pathname == '/Oklahoma%20City':
         return Oklahoma_City.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Orlando':
+      elif pathname == '/Orlando':
         return Orlando.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Philadelphia':
+      elif pathname == '/Philadelphia':
         return Philadelphia.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Phoenix':
+      elif pathname == '/Phoenix':
         return Phoenix.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Portland':
+      elif pathname == '/Portland':
         return Portland.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Sacramento':
+      elif pathname == '/Sacramento':
         return Sacramento.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/San Antonio':
+      elif pathname == '/San%20Antonio':
         return San_Antonio.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Toronto':
+      elif pathname == '/Toronto':
         return Toronto.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Utah':
+      elif pathname == '/Utah':
         return Utah.layout, False, False, False, False, False
     
-      elif pathname[8:] == '/Washington':
+      elif pathname == '/Washington':
         return Washington.layout, False, False, False, False, False
       else:
           return home.layout, False, False, False, False, True
