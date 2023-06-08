@@ -27,7 +27,7 @@ for team,nombre in zip(teams,nombres):
         color='dark',
         style={'height':'100%','padding':'20px'},
         outline=True,
-    ),href=f'/{team}',style={'color':'black'}))
+    ),href=f'/teams/{team}',style={'color':'black','textDecoration':'none'}))
 
 cards = dbc.Row([dbc.Col(i, width=3, style={'marginBottom':'20px'}) for i in l])
 

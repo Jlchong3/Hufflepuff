@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from pages import equipos, analisis, home, jose, miguel, darwin
-from pages import Atlanta, Boston, Brooklyn, Charlotte, Chicago, Cleveland, Dallas, Denver, Detroit, Golden_State, Houston, Indiana, LAClippers, LALakers, Memphis,Miami, Milwaukee, Minnesota, New_Orleans, New_York,Oklahoma_City, Orlando, Philadelphia, Phoenix, Portland, Sacramento, San_Antonio, Toronto, Utah, Washington
+from pages.teams import Atlanta, Boston, Brooklyn, Charlotte, Chicago, Cleveland, Dallas, Denver, Detroit, Golden_State, Houston, Indiana, LAClippers, LALakers, Memphis,Miami, Milwaukee, Minnesota, New_Orleans, New_York,Oklahoma_City, Orlando, Philadelphia, Phoenix, Portland, Sacramento, San_Antonio, Toronto, Utah, Washington
 
 from app import server
 from app import app
@@ -35,7 +35,7 @@ navbar = dbc.Navbar(
                 # Use row and col to control vertical alignment of logo / brand
                 dbc.Row(
                     [
-                        dbc.Col(html.Img(src="assets/nba.png", height="100px")),
+                        dbc.Col(html.Img(src="assets/nba.png", height="100px", id='logo')),
                     ],
                     align="center",
                     justify='center',
@@ -85,109 +85,110 @@ app.layout = html.Div([
               Output('darwin', 'active'),
               Output('miguel', 'active'),
               Output('home', 'active'),
+              Output('logo','src'),
                [Input('url', 'pathname')])
 def display_page(pathname):
       if  pathname == '/equipos':
-          return equipos.layout, True, False, False, False, False
+          return equipos.layout, True, False, False, False, False, "assets/nba.png"
       elif pathname == '/analisis':
-          return analisis.layout, False, True, False, False, False
+          return analisis.layout, False, True, False, False, False, "assets/nba.png"
       elif pathname == '/darwin':
-          return darwin.layout, False, False, True, False, False
+          return darwin.layout, False, False, True, False, False, "assets/nba.png"
       elif pathname == '/miguel':
-          return miguel.layout, False, False, False, True, False
+          return miguel.layout, False, False, False, True, False,"assets/nba.png"
       elif pathname == '/jose':
-          return jose.layout, False, False, False, False, False
-      elif pathname == '/Atlanta':
-        return Atlanta.layout, False, False, False, False, False
+          return jose.layout, False, False, False, False, False, "assets/nba.png"
+      elif pathname == '/teams/Atlanta':
+        return Atlanta.layout, False, False, False, False, False, "../assets/nba.png" 
     
-      elif pathname == '/Boston':
-        return Boston.layout, False, False, False, False, False
+      elif pathname == '/teams/Boston':
+        return Boston.layout, False, False, False, False, False,"../assets/nba.png" 
     
-      elif pathname == '/Brooklyn':
-        return Brooklyn.layout, False, False, False, False, False
+      elif pathname == '/teams/Brooklyn':
+        return Brooklyn.layout, False, False, False, False, False,"../assets/nba.png" 
     
-      elif pathname == '/Charlotte':
-        return Charlotte.layout, False, False, False, False, False
+      elif pathname == '/teams/Charlotte':
+        return Charlotte.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Chicago':
-        return Chicago.layout, False, False, False, False, False
+      elif pathname == '/teams/Chicago':
+        return Chicago.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Cleveland':
-        return Cleveland.layout, False, False, False, False, False
+      elif pathname == '/teams/Cleveland':
+        return Cleveland.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Dallas':
-        return Dallas.layout, False, False, False, False, False
+      elif pathname == '/teams/Dallas':
+        return Dallas.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Denver':
-        return Denver.layout, False, False, False, False, False
+      elif pathname == '/teams/Denver':
+        return Denver.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Detroit':
-        return Detroit.layout, False, False, False, False, False
+      elif pathname == '/teams/Detroit':
+        return Detroit.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Golden%20State':
-        return Golden_State.layout, False, False, False, False, False
+      elif pathname == '/teams/Golden%20State':
+        return Golden_State.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Houston':
-        return Houston.layout, False, False, False, False, False
+      elif pathname == '/teams/Houston':
+        return Houston.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Indiana':
-        return Indiana.layout, False, False, False, False, False
+      elif pathname == '/teams/Indiana':
+        return Indiana.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/L.A.Clippers':
-        return LAClippers.layout, False, False, False, False, False
+      elif pathname == '/teams/L.A.Clippers':
+        return LAClippers.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/L.A.Lakers':
-        return LALakers.layout, False, False, False, False, False
+      elif pathname == '/teams/L.A.Lakers':
+        return LALakers.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Memphis':
-        return Memphis.layout, False, False, False, False, False
+      elif pathname == '/teams/Memphis':
+        return Memphis.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Miami':
-        return Miami.layout, False, False, False, False, False
+      elif pathname == '/teams/Miami':
+        return Miami.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Milwaukee':
-        return Milwaukee.layout, False, False, False, False, False
+      elif pathname == '/teams/Milwaukee':
+        return Milwaukee.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Minnesota':
-        return Minnesota.layout, False, False, False, False, False
+      elif pathname == '/teams/Minnesota':
+        return Minnesota.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/New%20Orleans':
-        return New_Orleans.layout, False, False, False, False, False
+      elif pathname == '/teams/New%20Orleans':
+        return New_Orleans.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/New%20York':
-        return New_York.layout, False, False, False, False, False
+      elif pathname == '/teams/New%20York':
+        return New_York.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Oklahoma%20City':
-        return Oklahoma_City.layout, False, False, False, False, False
+      elif pathname == '/teams/Oklahoma%20City':
+        return Oklahoma_City.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Orlando':
-        return Orlando.layout, False, False, False, False, False
+      elif pathname == '/teams/Orlando':
+        return Orlando.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Philadelphia':
-        return Philadelphia.layout, False, False, False, False, False
+      elif pathname == '/teams/Philadelphia':
+        return Philadelphia.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Phoenix':
-        return Phoenix.layout, False, False, False, False, False
+      elif pathname == '/teams/Phoenix':
+        return Phoenix.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Portland':
-        return Portland.layout, False, False, False, False, False
+      elif pathname == '/teams/Portland':
+        return Portland.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Sacramento':
-        return Sacramento.layout, False, False, False, False, False
+      elif pathname == '/teams/Sacramento':
+        return Sacramento.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/San%20Antonio':
-        return San_Antonio.layout, False, False, False, False, False
+      elif pathname == '/teams/San%20Antonio':
+        return San_Antonio.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Toronto':
-        return Toronto.layout, False, False, False, False, False
+      elif pathname == '/teams/Toronto':
+        return Toronto.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Utah':
-        return Utah.layout, False, False, False, False, False
+      elif pathname == '/teams/Utah':
+        return Utah.layout, False, False, False, False, False,"../assets/nba.png"
     
-      elif pathname == '/Washington':
-        return Washington.layout, False, False, False, False, False
+      elif pathname == '/teams/Washington':
+        return Washington.layout, False, False, False, False, False,"../assets/nba.png"
       else:
-          return home.layout, False, False, False, False, True
+        return home.layout, False, False, False, False, True,"assets/nba.png"
 
 
 if __name__ == '__main__':

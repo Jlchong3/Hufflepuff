@@ -9,7 +9,7 @@ from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from dash import dash_table
 
-df_1 = pd.read_csv(r'pages/NBA-P.csv')
+df_1 = pd.read_csv(r'pages/teams/NBA-P.csv')
 
 teams = np.sort(df_1.Tm.unique())
 
@@ -19,7 +19,7 @@ nombres = ['Hawks','Celtics','Nets','Hornets','Bulls','Cavaliers','Mavericks',
            'Magic','76ers','Suns','TrailBlazers','Kings','Spurs','Raptors','Jazz','Wizards']
 
 for team,nombre in zip(teams,nombres):
-    f = open(f'pages/{team}.py','w')
+    f = open(f'pages/teams/{team}.py','w')
     f.write(f'''\
 import plotly.express as px
 import pandas as pd
@@ -34,7 +34,7 @@ from dash import dash_table
 
 from app import app        
     
-df_1 = pd.read_csv(r'pages/NBA-P.csv')
+df_1 = pd.read_csv(r'pages/teams/NBA-P.csv')
 
 df_1.drop(columns=['Unnamed: 0.1','Unnamed: 0'], inplace=True)       
             
@@ -63,7 +63,7 @@ def filter_year(value):
     df_year = df[value == df['Season']]
     if 'Season' in df_year.columns:
         df_year.drop(columns=['Season'], inplace=True)
-    header = [html.Thead(html.Tr([html.Td(i,style:('Fontweight':'Bold')) for i in df_year.columns]))]
+    header = [html.Thead(html.Tr([html.Td(i,style=('Fontweight':'Bold')) for i in df_year.columns]))]
     rows = []
     for i in range(df_year.shape[0]):
         player = []
