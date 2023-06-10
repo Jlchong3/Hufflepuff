@@ -19,20 +19,41 @@ nombres = ['Hawks','Celtics','Nets','Hornets','Bulls','Cavaliers','Mavericks',
            'Magic','76ers','Suns','TrailBlazers','Kings','Spurs','Raptors','Jazz','Wizards']
 l = []
 for team,nombre in zip(teams,nombres):
-    l.append(html.A(dbc.Card(
+    l.append(html.A(
+                dbc.Card(
+                    [
+                    dbc.CardImg(src=f'../assets/equipos/{team}.png'),
+                    dbc.CardBody(f'{team} {nombre}' if nombre not in ['Clippers','Lakers'] else f'L.A {nombre}', 
+                                 style={'fontSize':'1.1vw','textAlign':'center','fontWeight':'550'}),
+                    ],
+                    color='dark',
+                    style={'height':'100%','padding':'20px'},
+                    outline=True,
+                    ),
+                href=f'/teams/{team}',
+                style={'color':'black','textDecoration':'none'}
+                )
+            )
+
+cards = dbc.Row([
+            dbc.Col(i, width=3, style={'marginBottom':'20px'}) for i in l
+            ])
+
+layout = dbc.Container([
+    html.Hr(style = {'height':'2px','backgroundColor':'black','width':'100%'}),
+    html.Div(
         [
-        dbc.CardImg(src=f'../assets/equipos/{team}.png'),
-        dbc.CardBody(f'{team} {nombre}' if nombre not in ['Clippers','Lakers'] else f'L.A {nombre}', style={'fontSize':'1.1vw','textAlign':'center','fontWeight':'550'}),
+        html.H1('Equipos Actuales', 
+                style={'fontFamily':'monospace','fontWeight':'bold','fontSize':'40px'}
+                )
         ],
-        color='dark',
-        style={'height':'100%','padding':'20px'},
-        outline=True,
-    ),href=f'/teams/{team}',style={'color':'black','textDecoration':'none'}))
+        style={'margin':'25px','marginLeft':'0px'}
+        ),
 
-cards = dbc.Row([dbc.Col(i, width=3, style={'marginBottom':'20px'}) for i in l])
-
-layout = dbc.Container([html.Div(
-    [cards])],id='team-container')
+    html.Div(
+        [cards])],
+        id='team-container'
+        )
 
     
 

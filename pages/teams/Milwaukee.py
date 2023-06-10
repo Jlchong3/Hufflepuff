@@ -26,7 +26,8 @@ dropdown = dcc.Dropdown(['2021-22','2020-21','2019-20','2018-19','2017-18',
 
 layout = dbc.Container([
     html.Div([
-        html.H1('Milwaukee Bucks')
+        html.H1('Milwaukee Bucks', 
+                style={'fontFamily':'monospace','fontWeight':'550'})
     ]),
     html.Div([dropdown]),
     html.Div(
