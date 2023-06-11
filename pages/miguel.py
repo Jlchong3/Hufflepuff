@@ -11,7 +11,7 @@ from dash import dash_table
 
 from app import app
 
-df= pd.read_csv("C:\Users\User\Hufflepuff\pages\NBA_Team_Stats.csv")
+df= pd.read_csv("pages\NBA_Team_Stats.csv")
 dfmig = df.copy
 
 def filterteams(equipo):
