@@ -13,7 +13,7 @@ from app import app
 
 df= pd.read_csv("pages\\NBA_Team_Stats.csv")
 dfmig = df.copy
-
+print(df)
 def filterteams(equipo):
     dfnew = dfmig[dfmig["Team"]== equipo] 
     return dfnew
