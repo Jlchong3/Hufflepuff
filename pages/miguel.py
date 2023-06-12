@@ -13,12 +13,11 @@ from app import app
 
 df= pd.read_csv("pages\\NBA_Team_Stats.csv")
 dfmig = df.copy
-print(df)
 def filterteams(equipo):
     dfnew = dfmig[dfmig["Team"]== equipo] 
     return dfnew
 O = []
-for elem in dfmig["3gm-a"]:
+for elem in dfmig[r"3gm-a"]:
     a,b = elem.split("-")
     O.append((float(a)+float(b))/2)
 dfmig["3gma"]= O
