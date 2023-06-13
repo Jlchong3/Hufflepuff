@@ -82,4 +82,9 @@ fig.show()
 app = dash.Dash()
 app.layout = html.Div([dcc.Graph(figure=fig)])
 
-layout = dbc.Container()
+layout = dbc.Container(
+    html.Div([
+        dcc.Dropdown(teams,"Golden State", id="Teams drop")
+
+    ])
+)
