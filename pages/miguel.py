@@ -86,8 +86,25 @@ app.layout = html.Div([dcc.Graph(figure=fig)])
 layout = dbc.Container(html.Div([
     html.Div([
         dcc.Dropdown(teams,"Golden State", id="Teams drop")]),
-    html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")]    
-        )]))
+    html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")]),
+    dcc.Graph(id="Radial-Graph")
+    ]))
+@app.callback(
+    Output("Radial-Graph","figure"),
+    Input("Teams drop","value"),
+    Input("Year", "value"),
+)
 
-#layout = dbc.Container(html.Div(
-    #html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")])))
+def update_graph(year,team):
+    linea = dfmig[dfmig["Year"]==year][dfmig["Team"]==team]
+    To = linea["To"].values[0]
+    Reb = linea["Reb"].values[0]
+    Ast = linea["Ast"].values[0]
+    Stl = linea["Stl"].values[0]
+    Dreb = linea["Dreb"].values[0]
+    dfc = pd.DataFrame(dict(r=[To,Reb,Ast,Stl,Dreb],
+    theta=['To','Reb','Ast',
+           'Stl', 'Dreb']))
+    fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
+    fig.show()
+    
