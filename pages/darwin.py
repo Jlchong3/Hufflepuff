@@ -442,7 +442,7 @@ for i,j in zip(top5["Ftm"],top5["Fta"]):
 top5["Ft%"]=(Ftp_teams)
 top5=top5.sort_values("Eficiencia",ascending=False)
 
-layout = html.Div([
+layout = dbc.Container([html.Div([
             dbc.Container([
                 dbc.Row([
                     dbc.Col(html.H1("Casa Hufflepuff",className="text-center"),
@@ -559,7 +559,7 @@ layout = html.Div([
             html.Br(), 
             ]),
             ]),
-])
+])])
 @app.callback(
     Output("grafico_barras","figure"),
     Input("topeff","value")
