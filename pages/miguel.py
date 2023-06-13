@@ -80,6 +80,6 @@ dfc = pd.DataFrame(dict(
 fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
 fig.show()
 app = dash.Dash()
-app.layout = html.Div([dcc.graph(figure=fig)])
+app.layout = html.Div([dcc.Graph(figure=fig)])
 
 layout = dbc.Container()
