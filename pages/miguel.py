@@ -77,14 +77,17 @@ dfc = pd.DataFrame(dict(
     r=[14.0, 42.8, 15.4, 7.1, 29.5],
     theta=['To','Reb','Ast',
            'Stl', 'Dreb']))
+"""
 fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
 fig.show()
 app = dash.Dash()
 app.layout = html.Div([dcc.Graph(figure=fig)])
-
-layout = dbc.Container(
+"""
+layout = dbc.Container(html.Div([
     html.Div([
-        dcc.Dropdown(teams,"Golden State", id="Teams drop")
+        dcc.Dropdown(teams,"Golden State", id="Teams drop")]),
+    html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")]    
+        )]))
 
-    ])
-)
+#layout = dbc.Container(html.Div(
+    #html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")])))
