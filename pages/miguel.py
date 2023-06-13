@@ -107,4 +107,3 @@ def update_graph(year,team):
            'Stl', 'Dreb']))
     fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
     fig.show()
-    
