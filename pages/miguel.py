@@ -12,11 +12,12 @@ from dash import dash_table
 from app import app
 
 df= pd.read_csv(r"pages\\NBA_Team_Stats.csv")
-dfmig = df.copy
+dfmig = df.copy()
 def filterteams(equipo):
     dfnew = dfmig[dfmig["Team"]== equipo] 
     return dfnew
 O = []
+"""
 for elem in dfmig["3gm-a"]:
     a,b = elem.split("-")
     O.append((float(a)+float(b))/2)
@@ -50,6 +51,7 @@ for elem in dfmig["Ftm-a"]:
     b = float(b)
     Z.append(round(a/b,2))
 dfmig["Ftmper"]= Z
+"""
 
 teams = dfmig["Team"].unique()
 def filterteams2(equipo):
