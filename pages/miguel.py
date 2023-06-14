@@ -12,7 +12,7 @@ from dash import dash_table
 
 from app import app
 
-df= pd.read_csv(r"pages\\NBA_Team_Stats.csv")
+df= pd.read_csv(r"pages\NBA_Team_Stats.csv")
 dfmig = df.copy()
 def filterteams(equipo):
     dfnew = dfmig[dfmig["Team"]== equipo] 
@@ -104,21 +104,43 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.update_layout(barmode='group', xaxis_tickangle=-45)
-fig.show()
 
 layout = dbc.Container(
     html.Div([
-    html.Div([html.H1("Estadisticas relevantes por equipo y temporada")]),
-    html.Div([dcc.Dropdown(teams,"Golden State", id="Teams drop")]),
-    html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")]),
-    html.Div([dcc.Graph(id="Radial-Graph")]),
-    html.Div([html.H2("Relacion de Dribles y Faltas cometidas con respecto al tiempo"),dcc.Graph(figure=fig)])]))
+        html.Div([
+            html.H1("Estadisticas relevantes por equipo y temporada")
+            ]),
+        html.Br(),
+        html.Div([
+            html.Div([
+                dcc.Dropdown(teams,"Golden State", id="Teams drop")
+                ],
+                style={'width':'47%','marginRight':'1vw'}
+                ),
+            html.Div([
+                dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")
+                ],
+                style={'width':'47%'}
+                )
+            ],
+            style={'display':'flex','flexDirection':'row','justifyContent':'center'}
+            ),
+
+        html.Div([
+            dcc.Graph(id="Radial-Graph")
+            ]),
+
+        html.Div([
+            html.H2("Relacion de Dribles y Faltas cometidas con respecto al tiempo"),dcc.Graph(figure=fig)
+            ])
+        ])
+    )
 
 @app.callback(
     Output("Radial-Graph","figure"),
     Input("Teams drop","value"),
     Input("Year", "value"),
-    prevent_initial_call = True)
+    )
 
 def grafico2(nombre,año):
     lindf = pd.DataFrame(dfmig[dfmig["Year"]==año])
