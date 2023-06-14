@@ -35,18 +35,21 @@ layout = dbc.Container([
         html.Div(
             [
             html.Div(
-                html.H1('Hola'), 
-                style={'gridItem':'2'}
+                html.Img(alt='Suns vs Nuggets',src='../assets/home/juego1.png'), 
             ),
             html.Div(
-                html.H1('Hello'),
-                style={'gridItem':'3'}
+                html.Img(alt='Lakers vs Warriors',src='../assets/home/juego2.png'),
+                style={'borderTop':'1px solid black'}
+            ),
+            html.Div(
+                html.Img(alt='Heat vs Nuggets',src='../assets/home/juego3.png'),
+                style={'borderTop':'1px solid black'}
             )
             ],
-                style={'display':'grid','gridTemplateRows':'repeat(3, 1fr)','width':'32%','marginLeft':'1vw'})
+                style={'display':'grid','gridTemplateRows':'repeat(3, 1fr)','width':'32%','marginLeft':'2vw'})
         ],
             style = {'display':'flex','flexDirection':'row','width':'100%'})
     ],
-    style = {'display':'flex','flexDirection':'column','alignItems':'flex-start','marginBottom':'10vw'}
+    style = {'display':'flex','flexDirection':'column','alignItems':'flex-start','marginBottom':'6vw','border-style':'black'}
     )
 ])
