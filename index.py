@@ -76,14 +76,12 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     navbar,
     html.Div(id='page-content'),
-    html.Div([
        html.Footer(
           html.Div([
              html.Small('Copyright © Casa Hufflepuff. All rigths reserved')
              ],
              style={'backgroundColor':'#4799c9','color':'white','textAlign':'center'}))
       ])
-])
 
 
 @app.callback(Output('page-content', 'children'),
