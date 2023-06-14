@@ -438,7 +438,7 @@ Ftp_teams=[]
 for i,j in zip(top5["Ftm"],top5["Fta"]):
     Ftp=(i/j)*100
     Ftp=round(Ftp,1)
-    Ftp_teams.append(Fgp)
+    Ftp_teams.append(Ftp)
 top5["Ft%"]=(Ftp_teams)
 top5=top5.sort_values("Eficiencia",ascending=False)
 
@@ -582,6 +582,8 @@ def update_graph(selected_value):
     Input("scattervar","value")
 )
 def update_graph(selected_value):
+    if selected_value is None:
+        selected_value="Pts"
     fig=px.scatter(top5,y=selected_value,x="1 variable eff",color="Team")
     fig.update_traces(marker_size=30)
     return fig
