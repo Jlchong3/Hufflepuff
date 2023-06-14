@@ -447,7 +447,8 @@ layout = dbc.Container([html.Div([
                 dbc.Row([
                     dbc.Col(html.H1("Casa Hufflepuff",className="text-center"),
                             className="mb-5 mt-5")
-                ]),]),
+                ]),
+            ]),
             dbc.Row([]),
             html.Div([html.H1("NBA Teams Stats"),
                 html.Div([
@@ -465,14 +466,14 @@ layout = dbc.Container([html.Div([
             html.Div([
                 html.H2("Distribución de los stats de la 1° variable eff",style={'margin-top':'4vw'}),
                 dcc.Dropdown(
-                id="scattervar",
-                options=["Pts","Reb","Ast","Stl","Blk"],
-                value="Pts",
-                placeholder="Seleccione una variable",
-                clearable=False,
+                    id="scattervar",
+                    options=["Pts","Reb","Ast","Stl","Blk"],
+                    value="Pts",
+                    placeholder="Seleccione una variable",
+                    clearable=False,
                 ),
                 dcc.Graph(id="scatter_1°eff"),
-            html.Br(),
+                html.Br(),
             ]),
             html.Div([
                 html.H2("Porcentajes de los tiros de cada equipo"),
@@ -484,7 +485,7 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="%"),
-            html.Br(),
+                html.Br(),
             ]),
             html.Div([
                 html.H2("Informacion de los goles de campo de cada equipo"),
@@ -496,7 +497,7 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="Fgg"),
-            html.Br(), 
+                html.Br(), 
             ]),
             html.Div([
                 html.H2("Informacion de los goles de tres puntos de cada equipo"),
@@ -508,7 +509,7 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="Tgg"),
-            html.Br(), 
+                html.Br(), 
             ]),
             html.Div([
                 html.H2("Informacion de los tiros libres de cada equipo"),
@@ -520,7 +521,7 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="Ftg"),
-            html.Br(), 
+                html.Br(), 
             ]),
             html.Div([
                 html.H2("Distribución de los stats de la 2° variable eff",style={'margin-top':'4vw'}),
@@ -532,7 +533,7 @@ layout = dbc.Container([html.Div([
                 clearable=False,
                 ),
                 dcc.Graph(id="scatter_2°eff"),
-            html.Br(),
+                html.Br(),
             ]),
             html.Div([
                 html.H2("Eficiencia y diferencia de eficiencia de cada equipo"),
@@ -544,7 +545,7 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="Eff_Deff_g"),
-            html.Br(),
+                html.Br(),
             ]),
             html.Div([
                 html.H2("Informacion de los rebotes de cada equipo"),
@@ -556,10 +557,11 @@ layout = dbc.Container([html.Div([
                     clearable=False,
                 ),
                 dcc.Graph(id="Rebg"),
-            html.Br(), 
+                html.Br(), 
             ]),
-            ]),
-])])
+        ]),
+    ])
+])
 @app.callback(
     Output("grafico_barras","figure"),
     Input("topeff","value")
@@ -580,16 +582,16 @@ def update_graph(selected_value):
     Input("scattervar","value")
 )
 def update_graph(selected_value):
-    fig=px.scatter(top5,y=selected_value,x="1 variable eff",color="Team"),
-    fig.update_traces(marker_size=30),
-    return fig,
+    fig=px.scatter(top5,y=selected_value,x="1 variable eff",color="Team")
+    fig.update_traces(marker_size=30)
+    return fig
 
 @app.callback(
     Output("%","figure"),
     Input("Fg%","value")
 )
 def update_graph(selected_value):
-    fig=go.Figure(),
+    fig=go.Figure()
     fig.add_trace(go.Bar(
         x=top5["Team"],
         y=top5[selected_value],
@@ -604,7 +606,7 @@ def update_graph(selected_value):
     Input("Fg","value")
 )
 def update_graph(selected_value):
-    fig=go.Figure(),
+    fig=go.Figure()
     fig.add_trace(go.Scatter(
         x=top5["Team"],
         y=top5[selected_value],
@@ -618,7 +620,7 @@ def update_graph(selected_value):
     Input("Tg","value")
 )
 def update_graph(selected_value):
-    fig=go.Figure(),
+    fig=go.Figure()
     fig.add_trace(go.Scatter(
         x=top5["Team"],
         y=top5[selected_value],
@@ -633,7 +635,7 @@ def update_graph(selected_value):
     Input("Ft","value")
 )
 def update_graph(selected_value):
-    fig=go.Figure(),
+    fig=go.Figure()
     fig.add_trace(go.Scatter(
         x=top5["Team"],
         y=top5[selected_value],
@@ -648,9 +650,9 @@ def update_graph(selected_value):
     Input("scattervar2","value")
 )
 def update_graph(selected_value):
-    fig=px.scatter(top5,y=selected_value,x="2 variable eff",color="Team"),
-    fig.update_traces(marker_size=30),
-    return fig,
+    fig=px.scatter(top5,y=selected_value,x="2 variable eff",color="Team")
+    fig.update_traces(marker_size=30)
+    return fig
 
 @app.callback(
     Output("Eff_Deff_g","figure"),
@@ -672,7 +674,7 @@ def update_graph(selected_value):
     Input("Rebs","value")
 )
 def update_graph(selected_value):
-    fig=go.Figure(),
+    fig=go.Figure()
     fig.add_trace(go.Scatter(
         x=top5["Team"],
         y=top5[selected_value],
