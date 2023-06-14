@@ -1,6 +1,7 @@
 import plotly.express as px
 import pandas as pd
 import numpy as np
+import plotly.graph_objects as go 
 
 import dash
 from dash import Dash, dcc, html
@@ -83,18 +84,63 @@ fig.show()
 app = dash.Dash()
 app.layout = html.Div([dcc.Graph(figure=fig)])
 """
-layout = dbc.Container(html.Div([
+
+dfouls = pd.DataFrame(dfmig.groupby("Year")["Pf"].sum())
+dfdrib = pd.DataFrame(dfmig.groupby("Year")["Dreb"].sum())
+
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=df["Year"].unique(),
+    y=dfouls["Pf"],
+    name='Fouls',
+    marker_color='#025464'
+))
+fig.add_trace(go.Scatter(
+    x=df["Year"].unique(),
+    y=dfdrib["Dreb"].unique(),
+    name='Dribbles',
+    marker_color='#E57C23'
+))
+
+fig.update_layout(barmode='group', xaxis_tickangle=-45)
+fig.show()
+
+layout = dbc.Container(
     html.Div([
-        dcc.Dropdown(teams,"Golden State", id="Teams drop")]),
+    html.Div([html.H1("Estadisticas relevantes por equipo y temporada")]),
+    html.Div([dcc.Dropdown(teams,"Golden State", id="Teams drop")]),
     html.Div([dcc.Dropdown(dfmig["Year"].unique(), value = "2021-2022", id="Year")]),
-    dcc.Graph(id="Radial-Graph")
-    ]))
+    html.Div([dcc.Graph(id="Radial-Graph")]),
+    html.Div([html.H2("Relacion de Dribles y Faltas cometidas con respecto al tiempo"),dcc.Graph(figure=fig)])]))
+
 @app.callback(
     Output("Radial-Graph","figure"),
     Input("Teams drop","value"),
     Input("Year", "value"),
-)
+    prevent_initial_call = True)
 
+def grafico2(nombre,año):
+    lindf = pd.DataFrame(dfmig[dfmig["Year"]==año])
+    lindf2 = pd.DataFrame(lindf[lindf["Team"]==nombre])
+    To1 = lindf2["To"].iloc[0]
+    Reb1 = lindf2["Reb"].iloc[0]
+    Ast1 = lindf2["Ast"].iloc[0]
+    Stl1 = lindf2["Stl"].iloc[0]
+    Dreb1 = lindf2["Dreb"].iloc[0]
+    fig = go.Figure()
+    fig.add_trace(go.Scatterpolar(r = [To1,Reb1,Ast1,Stl1,Dreb1], theta = ['To','Reb','Ast',
+           'Stl', 'Dreb'], fill="toself", name = nombre))
+    fig.update_layout(
+    polar=dict(
+    radialaxis=dict(
+      visible=True,
+      range=[0, 50])),
+    showlegend=False)
+    return fig
+
+
+"""
 def update_graph(year,team):
     linea = dfmig[dfmig["Year"]==year][dfmig["Team"]==team]
     To = linea["To"].values[0]
@@ -106,4 +152,5 @@ def update_graph(year,team):
     theta=['To','Reb','Ast',
            'Stl', 'Dreb']))
     fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
-    fig.show()
+    return fig
+"""
