@@ -47,7 +47,7 @@ layout = dbc.Container([
                 style={'fontFamily':'monospace','fontWeight':'bold','fontSize':'40px'}
                 )
         ],
-        style={'margin':'25px','marginLeft':'0px'}
+        style={'margin':'30px','marginLeft':'0px'}
         ),
 
     html.Div(
