@@ -466,7 +466,7 @@ layout = dbc.Container([html.Div([
             html.Div([
                 html.H2("Distribución de los stats de la 1° variable eff",style={'margin-top':'4vw'}),
                 dcc.Dropdown(
-                    id="scattervar",
+                    id="scattervar1",
                     options=["Reb","Ast","Stl","Blk","Pts"],
                     value="Reb",
                     placeholder="Seleccione una variable",
@@ -579,11 +579,10 @@ def update_graph(selected_value):
 
 @app.callback(
     Output("scatter_1°eff","figure"),
-    Input("scattervar","value")
+    Input("scattervar1","value"),
+    prevent_initial_call=True
 )
 def update_graph(selected_value):
-    if selected_value is None:
-        selected_value="Pts"
     fig=px.scatter(top5,y=selected_value,x="1 variable eff",color="Team")
     fig.update_traces(marker_size=30)
     return fig
