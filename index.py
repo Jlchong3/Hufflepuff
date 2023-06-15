@@ -78,7 +78,7 @@ app.layout = html.Div([
     html.Div(id='page-content'),
        html.Footer(
           html.Div([
-             html.Small('Copyright © Casa Hufflepuff. All rigths reserved')
+             html.Small('Copyright © Casa Hufflepuff. All rights reserved')
              ],
              style={'backgroundColor':'#4799c9','color':'white','textAlign':'center'}))
       ])
