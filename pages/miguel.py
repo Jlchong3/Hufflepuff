@@ -112,6 +112,33 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(barmode='group', xaxis_tickangle=-45)
 
+
+
+def top5año(temporada):
+    dfb = dfmig[dfmig["Year"]==temporada]
+    n=0
+    L=[]
+    M=[]
+    X=[]
+    frames=[]
+    for i in range(len(dfb)):
+        L.append(dfb["Eff"].iloc[i])
+        L.sort()
+    for elem in reversed(L):
+        M.append(elem)
+    for elem in M[:3]:
+        a = pd.DataFrame(dfb[dfb["Eff"]==elem])
+        b= a["Team"].iloc[0]
+        X.append((b,elem))
+    for elem in X:
+        equipo,eff = elem
+        df1 = dfmig[dfmig["Year"]==temporada]
+        df2= df1[df1["Team"]== equipo]
+        df3 = df2[df2["Eff"]==eff]
+        frames.append(df3)
+        result = pd.concat(frames)
+    return result
+
 layout = dbc.Container(
     html.Div([
         html.Div([
@@ -137,7 +164,7 @@ layout = dbc.Container(
             dcc.Graph(id="Radial-Graph")
             ]),
         
-        html.Div([html.H2("Relacion de faltas y dribles con respecto al tiempo"),dcc.Graph(figure=fig)]),
+        html.Div([html.H2("Historico de relacion entre Dribles y Faltas Cometidas"),dcc.Graph(figure=fig)]),
 
         html.Div([html.Div([html.H2("Relacion de estadisticas por equipo con respecto al tiempo")])]),
 
@@ -149,7 +176,11 @@ layout = dbc.Container(
             html.Div([html.H2("Equipo"),dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], style={"width":"47%","marginRight":"1vw"}),
         ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
             
-        html.Div([dcc.Graph(id="linear")])
+        html.Div([dcc.Graph(id="linear")]),
+
+        html.Div([html.H2("Estadisticas Top 3 equipos por efectividad"),dcc.Dropdown(L, value = "2021-2022", id ="tabladrop")]),
+
+        html.Div(dbc.Table(id="table", color = "info", hover=True)),
             
             
             
@@ -195,3 +226,41 @@ def graflinea(var1,var2,equi):
     fig.add_trace(go.Scatter(x=dfmig["Year"].unique(),y=x1[var2],name=var2,
                              marker_color="#E57C23"))
     return fig
+
+
+@app.callback(
+    Output("table","children"),
+    Input("tabladrop","value")
+)
+
+def top5año(temporada):
+    dfb = dfmig[dfmig["Year"]==temporada]
+    n=0
+    L=[]
+    M=[]
+    X=[]
+    frames=[]
+    for i in range(len(dfb)):
+        L.append(dfb["Eff"].iloc[i])
+        L.sort()
+    for elem in reversed(L):
+        M.append(elem)
+    for elem in M[:3]:
+        a = pd.DataFrame(dfb[dfb["Eff"]==elem])
+        b= a["Team"].iloc[0]
+        X.append((b,elem))
+    for elem in X:
+        equipo,eff = elem
+        df1 = dfmig[dfmig["Year"]==temporada]
+        df2= df1[df1["Team"]== equipo]
+        df3 = df2[df2["Eff"]==eff]
+        frames.append(df3)
+    result = pd.concat(frames)
+    header = [html.Thead(html.Tr([html.Td(i) for i in result.columns]),style={'fontWeight':'Bold','fontSize':'17px'})]
+    rows = []
+    for i in range(result.shape[0]):
+        player = []
+        for data in result.iloc[i]:
+            player.append(html.Td(data))
+        rows.append(html.Tr(player))
+    return header + [html.Tbody(rows)]
