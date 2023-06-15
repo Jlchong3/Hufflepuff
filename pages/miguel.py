@@ -64,7 +64,7 @@ L = ['1997-1998', '1998-1999', '1999-2000', '2000-2001', '2001-2002',
        '2012-2013', '2013-2014', '2014-2015', '2015-2016', '2016-2017',
        '2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022']
 
-H = ["G","Min","Pts","Reb","Ast","Stl","Blk","To","Pf","Dreb","Oreb","Pct","Eff","Deff","3gmper","Fgmper","Ftmper"]
+H = ["G","Min","Pts","Reb","Ast","Stl","Blk","To","Pf","Dreb","Oreb","Pct","Eff","Deff"]
 
 S = []
 for elem in teams:
@@ -142,7 +142,7 @@ def top5año(temporada):
 layout = dbc.Container(
     html.Div([
         html.Div([
-            html.H1("Estadisticas relevantes por equipo y temporada")
+            html.H1("Estadísticas relevantes por equipo y temporada")
             ]),
         html.Br(),
         html.Div([
@@ -164,13 +164,13 @@ layout = dbc.Container(
             dcc.Graph(id="Radial-Graph")
             ]),
         
-        html.Div([html.H2("Historico de relacion entre Dribles y Faltas Cometidas"),dcc.Graph(figure=fig)]),
+        html.Div([html.H2("Histórico de relación entre Dribles y Faltas Cometidas"),dcc.Graph(figure=fig)]),
 
-        html.Div([html.Div([html.H2("Relacion de estadisticas por equipo con respecto al tiempo")])]),
+        html.Div([html.Div([html.H2("Relación de estadísticas por equipo con respecto al tiempo")])]),
 
         html.Div([
-            html.Div([html.H2("Estadistica 1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
-            html.Div([html.H2("Estadistica 2"), dcc.Dropdown(H, value="Pf", id="ejey")])
+            html.Div([html.H2("Estadística 1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
+            html.Div([html.H2("Estadística 2"), dcc.Dropdown(H, value="Pf", id="ejey")])
         ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
         html.Div([
             html.Div([html.H2("Equipo"),dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], style={"width":"47%","marginRight":"1vw"}),
@@ -178,9 +178,9 @@ layout = dbc.Container(
             
         html.Div([dcc.Graph(id="linear")]),
 
-        html.Div([html.H2("Estadisticas Top 3 equipos por efectividad"),dcc.Dropdown(L, value = "2021-2022", id ="tabladrop")]),
+        html.Div([html.H2("Estadísticas Top 3 equipos por efectividad"),dcc.Dropdown(L, value = "2021-2022", id ="tabladrop")]),
 
-        html.Div(dbc.Table(id="table", color = "info", hover=True)),
+        html.Div(dbc.Table(id="table", color = "info", hover=True), style={"width":"100%"}),
             
             
             
@@ -256,6 +256,7 @@ def top5año(temporada):
         df3 = df2[df2["Eff"]==eff]
         frames.append(df3)
     result = pd.concat(frames)
+    result = result.drop(["No","Year","Min"], axis = 1)
     header = [html.Thead(html.Tr([html.Td(i) for i in result.columns]),style={'fontWeight':'Bold','fontSize':'17px'})]
     rows = []
     for i in range(result.shape[0]):
