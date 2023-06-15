@@ -164,17 +164,46 @@ layout = dbc.Container(
             dcc.Graph(id="Radial-Graph")
             ]),
         
-        html.Div([html.H2("Historico de relacion entre Dribles y Faltas Cometidas"),dcc.Graph(figure=fig)]),
+        html.Div(
+            [
+            html.H1("Historico de relacion entre Dribles y Faltas Cometidas"),
+            dcc.Graph(figure=fig)
+            ]),
 
-        html.Div([html.Div([html.H2("Relacion de estadisticas por equipo con respecto al tiempo")])]),
+        html.Div(
+            [
+            html.Div(
+                [html.H1("Relacion de estadisticas por equipo con respecto al tiempo")])
+            ]),
+        html.Br(),
+        html.Div([
+            html.Div(
+                [
+                html.H2("Estadistica 1"), 
+                dcc.Dropdown(H, value= "G", id="ejex")
+                ],
+                style={'width':'47%','marginRight':'1vw'}
+                ),
 
+            html.Div(
+                [
+                html.H2("Estadistica 2"), 
+                dcc.Dropdown(H, value="Pf", id="ejey")
+                ],
+                style={'width':'47%'}
+                )
+            ],
+            style={'display':'flex','flexDirection':'row'}
+            ),
+        html.Br(),
         html.Div([
-            html.Div([html.H2("Estadistica 1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
-            html.Div([html.H2("Estadistica 2"), dcc.Dropdown(H, value="Pf", id="ejey")])
-        ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
-        html.Div([
-            html.Div([html.H2("Equipo"),dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], style={"width":"47%","marginRight":"1vw"}),
-        ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
+            html.Div(
+                [html.H2("Equipo"),
+                 dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], 
+                 style={'width':'95%'}
+                 ),
+            ],
+        style={"display":"flex","flexDirection":"row","justifyContent":"flexStart"}),
             
         html.Div([dcc.Graph(id="linear")]),
 
@@ -182,9 +211,7 @@ layout = dbc.Container(
 
         html.Div(dbc.Table(id="table", color = "info", hover=True)),
             
-            
-            
-            ]))
+]))
 
 @app.callback(
     Output("Radial-Graph","figure"),
