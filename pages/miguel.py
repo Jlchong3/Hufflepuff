@@ -142,8 +142,8 @@ layout = dbc.Container(
         html.Div([html.Div([html.H2("Relacion de estadisticas por equipo con respecto al tiempo")])]),
 
         html.Div([
-            html.Div([html.H2("V1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
-            html.Div([html.H2("V2"), dcc.Dropdown(H, value="Pf", id="ejey")])
+            html.Div([html.H2("Estadistica 1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
+            html.Div([html.H2("Estadistica 2"), dcc.Dropdown(H, value="Pf", id="ejey")])
         ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
         html.Div([
             html.Div([html.H2("Equipo"),dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], style={"width":"47%","marginRight":"1vw"}),
@@ -188,7 +188,7 @@ def grafico2(nombre,año):
     )
 
 def graflinea(var1,var2,equi):
-    x1 = pd.DataFrame(dfmig[dfmig["Team"]] == equi)
+    x1 = pd.DataFrame(dfmig[dfmig["Team"]== equi] )
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dfmig["Year"].unique(),y=x1[var1],name=var1,
                              marker_color="#025464"))
