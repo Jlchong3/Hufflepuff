@@ -27,22 +27,24 @@ layout = dbc.Container([
             items=[
                 {'key':'1','src':'../assets/home/slide1.png'},
                 {'key':'2','src':'../assets/home/Slide2.jpg'},
+                {'key':'3','src':'../assets/home/slide3.jpg'},
                 ],
-                controls = True,
-                indicators = False,
+                controls=False,
+                interval=3000,
+                indicators = True,
                 style = {'width':'60vw'}
                 ),
         html.Div(
             [
             html.Div(
-                html.Img(alt='Suns vs Nuggets',src='../assets/home/juego1.png'), 
+                html.Img(alt='Suns vs Nuggets',src='../assets/home/juego1.jpg',style={'height':'100%', 'width':'100%'}), 
             ),
             html.Div(
-                html.Img(alt='Lakers vs Warriors',src='../assets/home/juego2.png'),
-                style={'borderTop':'1px solid black'}
+                html.Img(alt='Lakers vs Warriors',src='../assets/home/juego2.jpg',style={'height':'100%', 'width':'100%'}),
+                style={'borderTop':'1px solid black',}
             ),
             html.Div(
-                html.Img(alt='Heat vs Nuggets',src='../assets/home/juego3.png'),
+                html.Img(alt='Heat vs Nuggets',src='../assets/home/juego3.jpg',style={'height':'100%', 'width':'100%'}),
                 style={'borderTop':'1px solid black'}
             )
             ],
@@ -50,6 +52,6 @@ layout = dbc.Container([
         ],
             style = {'display':'flex','flexDirection':'row','width':'100%'})
     ],
-    style = {'display':'flex','flexDirection':'column','alignItems':'flex-start','marginBottom':'6vw','border-style':'black'}
+    style = {'display':'flex','flexDirection':'column','alignItems':'flex-start','marginBottom':'4vw','border-style':'black'}
     )
 ])

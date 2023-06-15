@@ -77,12 +77,8 @@ app.layout = html.Div([
     navbar,
     html.Div(id='page-content'),
        html.Footer(
-          html.Div([
-             html.Small('Copyright © Casa Hufflepuff. All rights reserved')
-             ],
-             style={'backgroundColor':'#4799c9','color':'white','textAlign':'center'}))
-      ])
-
+             html.Small('Copyright © Casa Hufflepuff. All rigths reserved'),
+             style={'backgroundColor':'#4799c9','color':'white','textAlign':'center','marginTop':'1vw'})])
 
 @app.callback(Output('page-content', 'children'),
               Output('equipos', 'active'),
