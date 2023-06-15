@@ -467,8 +467,8 @@ layout = dbc.Container([html.Div([
                 html.H2("Distribución de los stats de la 1° variable eff",style={'margin-top':'4vw'}),
                 dcc.Dropdown(
                     id="scattervar",
-                    options=["Pts","Reb","Ast","Stl","Blk"],
-                    value="Pts",
+                    options=["Reb","Ast","Stl","Blk","Pts"],
+                    value="Reb",
                     placeholder="Seleccione una variable",
                     clearable=False,
                 ),
