@@ -15,7 +15,7 @@ from app import app
 df= pd.read_csv(r"pages\NBA_Team_Stats.csv")
 dfmig = df.copy()
 def filterteams(equipo):
-    dfnew = dfmig[dfmig["Team"]== equipo] 
+    dfnew = dfmig[dfmig["Team"== equipo]] 
     return dfnew
 O = []
 """
@@ -58,6 +58,13 @@ teams = dfmig["Team"].unique()
 def filterteams2(equipo):
     dfnew = dfmig[dfmig["Team"]== equipo] 
     return dfnew
+L = ['1997-1998', '1998-1999', '1999-2000', '2000-2001', '2001-2002',
+       '2002-2003', '2003-2004', '2004-2005', '2005-2006', '2006-2007',
+       '2007-2008', '2008-2009', '2009-2010', '2010-2011', '2011-2012',
+       '2012-2013', '2013-2014', '2014-2015', '2015-2016', '2016-2017',
+       '2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022']
+
+H = ["G","Min","Pts","Reb","Ast","Stl","Blk","To","Pf","Dreb","Oreb","Pct","Eff","Deff","3gmper","Fgmper","Ftmper"]
 
 S = []
 for elem in teams:
@@ -129,12 +136,24 @@ layout = dbc.Container(
         html.Div([
             dcc.Graph(id="Radial-Graph")
             ]),
+        
+        html.Div([html.H2("Relacion de faltas y dribles con respecto al tiempo"),dcc.Graph(figure=fig)]),
+
+        html.Div([html.Div([html.H2("Relacion de estadisticas por equipo con respecto al tiempo")])]),
 
         html.Div([
-            html.H2("Relacion de Dribles y Faltas cometidas con respecto al tiempo"),dcc.Graph(figure=fig)
-            ])
-        ])
-    )
+            html.Div([html.H2("Estadistica 1"), dcc.Dropdown(H, value= "G", id="ejex")], style={"width":"47%","marginRight":"1vw"}),
+            html.Div([html.H2("Estadistica 2"), dcc.Dropdown(H, value="Pf", id="ejey")])
+        ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
+        html.Div([
+            html.Div([html.H2("Equipo"),dcc.Dropdown(dfmig["Team"].unique(),value="Golden State",id="equipo")], style={"width":"47%","marginRight":"1vw"}),
+        ],style={"display":"flex","flexDirection":"row","justifyContent":"center"}),
+            
+        html.Div([dcc.Graph(id="linear")])
+            
+            
+            
+            ]))
 
 @app.callback(
     Output("Radial-Graph","figure"),
@@ -161,18 +180,18 @@ def grafico2(nombre,año):
     showlegend=False)
     return fig
 
+@app.callback(
+    Output("linear","figure"),
+    Input("ejex","value"),
+    Input("ejey","value"),
+    Input("equipo","value"),
+    )
 
-"""
-def update_graph(year,team):
-    linea = dfmig[dfmig["Year"]==year][dfmig["Team"]==team]
-    To = linea["To"].values[0]
-    Reb = linea["Reb"].values[0]
-    Ast = linea["Ast"].values[0]
-    Stl = linea["Stl"].values[0]
-    Dreb = linea["Dreb"].values[0]
-    dfc = pd.DataFrame(dict(r=[To,Reb,Ast,Stl,Dreb],
-    theta=['To','Reb','Ast',
-           'Stl', 'Dreb']))
-    fig = px.line_polar(dfc, r='r', theta='theta', line_close=True)
+def graflinea(var1,var2,equi):
+    x1 = pd.DataFrame(dfmig[dfmig["Team"]== equi] )
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dfmig["Year"].unique(),y=x1[var1],name=var1,
+                             marker_color="#025464"))
+    fig.add_trace(go.Scatter(x=dfmig["Year"].unique(),y=x1[var2],name=var2,
+                             marker_color="#E57C23"))
     return fig
-"""
